@@ -6,8 +6,9 @@ from django.db import models
 class UserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
         """ creates and saves a new user"""
-
-        user = self.model(email=email, password=password)
+        if not email:
+            raise ValueError("users Must a valid email")
+        user = self.model(email=self.normalize_email(email), password=password)
         user.set_password(password)
         user.save(using=self._db)
 
