@@ -3,7 +3,7 @@ from django.test import TestCase
 
 
 class TestUserModel(TestCase):
-    def test_create_user_with_email_successfull(self):
+    def test_create_user_with_email_successful(self):
         """ test creating a new user with email is succesfull"""
         email = "abedxh@gmail.com"
         password = "password"
