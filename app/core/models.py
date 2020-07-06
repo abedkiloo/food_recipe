@@ -8,9 +8,9 @@ class UserManager(BaseUserManager):
         """ creates and saves a new user"""
         if not email:
             raise ValueError("users Must a valid email")
-        user = self.model(email=self.normalize_email(email), password=password)
+        user = self.model(email=self.normalize_email(email))
         user.set_password(password)
-        user.save(using=self._db)
+        user.save(using=self.db)
 
         return user
 
@@ -19,6 +19,8 @@ class UserManager(BaseUserManager):
         user = self.create_user(email=email, password=password)
         user.is_superuser = True
         user.is_staff = True
+        user.is_active = True
+        user.save(using=self.db)
 
         return user
 
